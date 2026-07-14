@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── Base ──────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* offset for sticky header when jumping to anchors */
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-ink-950 text-zinc-100 font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-wide;
+  }
+  ::selection {
+    @apply bg-accent-400 text-ink-950;
+  }
+}
+
+/* ── Components ────────────────────────────────────────── */
+@layer components {
+  /* Section heading eyebrow + title pattern used across the site. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent-400;
+  }
+
+  /* Gradient text accent for emphasis words. */
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-300 via-accent-400 to-brand-400 bg-clip-text text-transparent;
+  }
+
+  /* Frosted card surface for dark theme. */
+  .card-surface {
+    @apply rounded-2xl border border-white/10 bg-ink-800/80 backdrop-blur;
+  }
+}

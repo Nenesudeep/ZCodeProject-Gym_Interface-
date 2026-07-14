@@ -1,0 +1,45 @@
+# Local development services for Anchor Strength.
+# Run `docker compose up -d db` to start Postgres; the API and CMS connect to it.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: anchor-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: anchor
+      POSTGRES_PASSWORD: anchor
+      POSTGRES_DB: anchor
+    ports:
+      - "5432:5432"
+    volumes:
+      - anchor-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U anchor -d anchor"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: anchor-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mail:
+    # Local SMTP catcher for testing transactional email (Resend in prod).
+    # View captured mail at http://localhost:8025
+    image: axllent/mailpit:latest
+    container_name: anchor-mail
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  anchor-db-data:

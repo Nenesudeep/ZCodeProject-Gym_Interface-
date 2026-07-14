@@ -1,0 +1,75 @@
+// Anchor Strength — Prisma schema.
+// v1 models the marketing lead-capture surface. v2 (members, bookings,
+// payments) extends this schema without restructuring what's here.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// A prospective member who requested a free trial / callback.
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  phone     String
+  goal      String? // e.g. "weight loss", "calisthenics", "general fitness"
+  program   String? // program slug they showed interest in
+  message   String?
+  source    String? @default("website") // utm / referrer
+  status    String   @default("new") // new | contacted | converted | lost
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  logs AuditLog[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+/// A general contact-form submission (questions, feedback, partnerships).
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("contact_messages")
+}
+
+/// Newsletter / email list subscriber.
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  consent   Boolean  @default(true)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("newsletter_subscribers")
+}
+
+/// Append-only audit trail for leads (and later, other entities).
+model AuditLog {
+  id        String   @id @default(cuid())
+  leadId    String?
+  lead      Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  action    String // e.g. "created", "status_changed"
+  from      String?
+  to        String?
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([leadId])
+  @@map("audit_logs")
+}

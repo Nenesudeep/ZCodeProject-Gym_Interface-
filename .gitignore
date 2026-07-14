@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.output/
+.nuxt/
+dist/
+build/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+.env.local
+
+# Databases / runtime data
+*.db
+*.db-journal
+data/
+uploads/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+Thumbs.db
+
+# Test / coverage
+coverage/
+
+# Strapi
+apps/cms/.cache/
+apps/cms/dist/
+apps/cms/build/
+apps/cms/.tmp/
+
+# Prisma
+apps/api/prisma/migrations/dev.db*
+
+# Misc
+.cache/

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { brand, telLink, whatsappLink } from '#imports'
+import { brand, telLink, whatsappLink } from '~/app/theme.config'
 
 // Nav links scroll to anchored home sections.
 const navLinks = [

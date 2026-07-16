@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { brand, whatsappLink } from '#imports'
+import { brand, whatsappLink } from '~/app/theme.config'
 
 const waMessage = `Hi ${brand.name}! I'd like to book a free trial session.`
 

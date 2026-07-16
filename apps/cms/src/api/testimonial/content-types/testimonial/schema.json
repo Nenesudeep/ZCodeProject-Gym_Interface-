@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial",
+    "description": "Member reviews and social proof."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "quote": { "type": "text", "required": true },
+    "rating": { "type": "integer", "min": 1, "max": 5, "default": 5, "required": true },
+    "source": { "type": "string", "maxLength": 60 },
+    "context": { "type": "string", "maxLength": 100 },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

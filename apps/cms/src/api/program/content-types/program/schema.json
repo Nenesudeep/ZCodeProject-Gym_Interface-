@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "programs",
+  "info": {
+    "singularName": "program",
+    "pluralName": "programs",
+    "displayName": "Program",
+    "description": "Training disciplines offered by Anchor Strength."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": { "visible": true },
+    "i18n": { "localized": false }
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 80 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "tagline": { "type": "string", "maxLength": 100 },
+    "icon": { "type": "string", "maxLength": 60, "description": "Icon name from the Lucide set, e.g. lucide:dumbbell" },
+    "description": { "type": "text", "required": true },
+    "body": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.rich-paragraph"
+    },
+    "isFlagship": { "type": "boolean", "default": false },
+    "keywords": { "type": "string" },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_shared_rich_paragraphs",
+  "info": {
+    "displayName": "Rich Paragraph",
+    "description": "A paragraph of body text."
+  },
+  "options": {},
+  "attributes": {
+    "text": { "type": "text", "required": true }
+  }
+}

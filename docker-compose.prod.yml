@@ -1,0 +1,61 @@
+# Production deployment composition.
+# Usage: docker compose -f docker-compose.prod.yml up -d
+# Override env vars via a .env.prod file or environment.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-anchor}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-anchor}
+    volumes:
+      - anchor-db-prod:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-anchor}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-anchor}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-anchor}?schema=public
+      CORS_ORIGINS: ${CORS_ORIGINS:-https://anchorstrength.fit}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      EMAIL_FROM: ${EMAIL_FROM}
+      EMAIL_TO: ${EMAIL_TO}
+      WHATSAPP_PHONE: ${WHATSAPP_PHONE:-919379066066}
+    ports:
+      - '${API_PORT:-4000}:4000'
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      NODE_ENV: production
+      API_BASE_URL: http://api:4000
+      PUBLIC_API_BASE_URL: ${PUBLIC_API_URL:-https://api.anchorstrength.fit}
+      SITE_URL: ${SITE_URL:-https://anchorstrength.fit}
+    ports:
+      - '${WEB_PORT:-3000}:3000'
+
+volumes:
+  anchor-db-prod:

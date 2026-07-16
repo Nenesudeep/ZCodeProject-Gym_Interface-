@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_shared_pricing_features",
+  "info": {
+    "displayName": "Pricing Feature",
+    "description": "A single feature line in a pricing plan."
+  },
+  "options": {},
+  "attributes": {
+    "text": { "type": "string", "required": true, "maxLength": 200 },
+    "included": { "type": "boolean", "default": true }
+  }
+}

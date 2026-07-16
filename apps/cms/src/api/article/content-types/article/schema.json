@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article",
+    "description": "Blog posts for content marketing and SEO."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 200 },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text", "required": true },
+    "body": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.rich-paragraph"
+    },
+    "date": { "type": "date", "required": true },
+    "author": { "type": "string", "default": "Anchor Strength", "maxLength": 80 },
+    "tags": { "type": "json", "description": "Array of tag strings" },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

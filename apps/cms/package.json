@@ -1,0 +1,31 @@
+{
+  "name": "@anchor/cms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Anchor Strength headless CMS (Strapi) — editable content for the marketing site.",
+  "scripts": {
+    "dev": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "lint": "echo 'no lint configured for cms'",
+    "typecheck": "echo 'no typecheck for cms'",
+    "clean": "rm -rf dist build .cache .tmp"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^5.6.0",
+    "@strapi/plugin-cloud": "^5.6.0",
+    "@strapi/plugin-users-permissions": "^5.6.0",
+    "better-sqlite3": "^11.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "styled-components": "^6.1.13"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x"
+  },
+  "strapi": {
+    "uuid": "anchor-strength-cms"
+  }
+}

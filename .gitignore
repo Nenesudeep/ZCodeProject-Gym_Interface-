@@ -44,6 +44,10 @@ apps/cms/.cache/
 apps/cms/dist/
 apps/cms/build/
 apps/cms/.tmp/
+apps/cms/.tmp/data.db
+apps/cms/.tmp/data.db-journal
+apps/cms/public/uploads/*
+!apps/cms/public/uploads/.gitkeep
 
 # Prisma
 apps/api/prisma/migrations/dev.db*

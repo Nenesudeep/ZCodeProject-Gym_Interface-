@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { brand, telLink, whatsappLink } from '#imports'
+import { brand, telLink, whatsappLink } from '~/app/theme.config'
 
 // Matches/beats the reference site's WhatsApp widget — adds a call button too.
 const waMessage = `Hi ${brand.name}! I'd like to book a free trial.`

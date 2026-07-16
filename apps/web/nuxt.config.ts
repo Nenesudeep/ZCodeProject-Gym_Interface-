@@ -10,7 +10,16 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@vueuse/nuxt',
     '@pinia/nuxt',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
   ],
+
+  // Site URL — used by sitemap + robots + canonical URLs.
+  // Override with SITE_URL in production.
+  site: {
+    url: process.env.SITE_URL || 'https://anchorstrength.fit',
+    name: 'Anchor Strength',
+  },
 
   // Runtime config: secrets/server-only + public (exposed to client).
   runtimeConfig: {

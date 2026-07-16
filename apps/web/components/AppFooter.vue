@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { brand, telLink, whatsappLink, instagramUrl } from '#imports'
+import { brand, telLink, whatsappLink, instagramUrl } from '~/app/theme.config'
 
 const year = new Date().getFullYear()
 const waMessage = `Hi ${brand.name}! I have a question.`

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pricing_plans",
+  "info": {
+    "singularName": "pricing-plan",
+    "pluralName": "pricing-plans",
+    "displayName": "Pricing Plan",
+    "description": "Membership tiers and promotional offers."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 60 },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "price": { "type": "decimal", "required": true },
+    "currency": { "type": "enumeration", "enum": ["INR", "USD"], "default": "INR", "required": true },
+    "period": { "type": "string", "required": true, "maxLength": 30 },
+    "priceNote": { "type": "string", "maxLength": 40 },
+    "description": { "type": "text", "required": true },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.pricing-feature"
+    },
+    "isFlagship": { "type": "boolean", "default": false },
+    "isPromo": { "type": "boolean", "default": false },
+    "ctaLabel": { "type": "string", "default": "Start training", "maxLength": 40 },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

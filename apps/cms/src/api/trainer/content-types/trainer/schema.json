@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trainers",
+  "info": {
+    "singularName": "trainer",
+    "pluralName": "trainers",
+    "displayName": "Trainer",
+    "description": "Coach profiles."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true, "maxLength": 80 },
+    "specialty": { "type": "string", "required": true, "maxLength": 100 },
+    "bio": { "type": "text", "required": true },
+    "certifications": { "type": "json", "description": "Array of certification strings" },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

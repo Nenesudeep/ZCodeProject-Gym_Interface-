@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "brand",
+  "info": {
+    "singularName": "brand-info",
+    "pluralName": "brand-infos",
+    "displayName": "Brand",
+    "description": "Single source of truth for gym branding, contact and hours."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": { "type": "string", "required": true, "default": "Anchor Strength" },
+    "tagline": { "type": "string", "default": "Boduppal's 1st Calisthenics Gym" },
+    "subTagline": { "type": "string", "default": "Join a team, not just a gym!" },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "phones": { "type": "json", "description": "Array of {label, number}" },
+    "whatsapp": { "type": "string", "maxLength": 20 },
+    "email": { "type": "email" },
+    "instagram": { "type": "string", "maxLength": 60 },
+    "facebook": { "type": "string", "maxLength": 60 },
+    "addressLine1": { "type": "string" },
+    "addressLine2": { "type": "string" },
+    "city": { "type": "string" },
+    "region": { "type": "string" },
+    "postalCode": { "type": "string", "maxLength": 20 },
+    "country": { "type": "string", "default": "IN", "maxLength": 2 },
+    "mapQuery": { "type": "string" },
+    "lat": { "type": "decimal" },
+    "lng": { "type": "decimal" },
+    "hours": { "type": "json", "description": "Array of {days, time, note}" },
+    "ratingScore": { "type": "decimal", "default": 5 },
+    "ratingCount": { "type": "integer", "default": 0 },
+    "ratingSource": { "type": "string", "default": "Justdial" }
+  }
+}

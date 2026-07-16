@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gallery_items",
+  "info": {
+    "singularName": "gallery-item",
+    "pluralName": "gallery-items",
+    "displayName": "Gallery Item",
+    "description": "Photos and reels for the gallery section."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true, "maxLength": 80 },
+    "caption": { "type": "string", "maxLength": 200 },
+    "type": { "type": "enumeration", "enum": ["photo", "reel"], "default": "photo", "required": true },
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "videos"]
+    },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

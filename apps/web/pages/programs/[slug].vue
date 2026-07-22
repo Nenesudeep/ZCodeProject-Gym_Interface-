@@ -4,25 +4,26 @@ import { useContent } from '~/app/composables/useContent'
 const route = useRoute()
 const { program } = useContent()
 const slug = computed(() => route.params.slug as string)
-const found = computed(() => program(slug.value))
+const p = computed(() => program(slug.value))
 
 // 404 if the slug doesn't match a program.
-if (!found.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Program not found', fatal: true })
-}
-
-const p = found.value!
+watchEffect(() => {
+  if (!p.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Program not found', fatal: true })
+  }
+})
 
 useSeoMeta({
-  title: `${p.title} in Hyderabad — Anchor Strength`,
-  description: p.description,
-  ogTitle: `${p.title} — Anchor Strength, Boduppal`,
-  ogDescription: p.description,
+  title: () => (p.value ? `${p.value.title} in Hyderabad` : 'Program'),
+  description: () => p.value?.description,
+  ogTitle: () => (p.value ? `${p.value.title} — Anchor Strength, Boduppal` : undefined),
+  ogDescription: () => p.value?.description,
+  ogImage: '/og-default.jpg',
 })
 </script>
 
 <template>
-  <div>
+  <div v-if="p">
     <!-- Hero band -->
     <section class="relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-brand-950 to-ink-950">
       <AppContainer class="py-16 sm:py-20">
@@ -77,7 +78,11 @@ useSeoMeta({
             <p class="mt-2 text-sm text-zinc-400">
               Book a free trial session and experience it for yourself. No commitment.
             </p>
-            <LeadForm endpoint="/api/leads" :default-program="p.slug" class="mt-4 !p-0 !bg-transparent !border-0 !backdrop-blur-none" />
+            <LeadForm
+              endpoint="/api/leads"
+              :default-program="p.slug"
+              class="mt-4 !border-0 !bg-transparent !p-0 !backdrop-blur-none"
+            />
           </div>
         </aside>
       </div>

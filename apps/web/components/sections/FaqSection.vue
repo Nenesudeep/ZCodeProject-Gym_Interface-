@@ -19,7 +19,9 @@ const toggle = (i: number) => (open.value = open.value === i ? null : i)
       <div v-for="(item, i) in items" :key="i" class="py-2">
         <button
           class="flex w-full items-center justify-between gap-4 py-4 text-left"
+          :id="`faq-trigger-${i}`"
           :aria-expanded="open === i"
+          :aria-controls="`faq-panel-${i}`"
           @click="toggle(i)"
         >
           <span class="font-display text-lg text-white">{{ item.question }}</span>
@@ -37,7 +39,13 @@ const toggle = (i: number) => (open.value = open.value === i ? null : i)
           leave-from-class="grid-rows-[1fr] opacity-100"
           leave-to-class="grid-rows-[0fr] opacity-0"
         >
-          <div v-show="open === i" class="overflow-hidden">
+          <div
+            v-show="open === i"
+            :id="`faq-panel-${i}`"
+            role="region"
+            :aria-labelledby="`faq-trigger-${i}`"
+            class="overflow-hidden"
+          >
             <p class="pb-4 pr-8 text-sm leading-relaxed text-zinc-400">{{ item.answer }}</p>
           </div>
         </Transition>

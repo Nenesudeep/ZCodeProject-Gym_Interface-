@@ -54,20 +54,27 @@ export function useLeadForm(endpoint: '/api/leads' | '/api/contact' = '/api/lead
       return true
     }
 
+    // Omit empty optional strings — Nest `@IsOptional()` only skips null/undefined,
+    // so `email: ""` fails `@IsEmail()` and `goal: ""` fails `@IsEnum()`.
+    const body = Object.fromEntries(
+      Object.entries(parsed.data).filter(([, value]) => value !== '' && value != null),
+    )
+
     try {
       await $fetch(`${pub.apiBaseUrl}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: parsed.data,
+        body,
       })
       status.value = 'success'
       return true
     } catch (err: unknown) {
       status.value = 'error'
-      const data = err as { data?: { message?: string } }
-      errorMessage.value =
-        data?.data?.message ??
-        'Something went wrong. Please try again or call us directly.'
+      const data = err as { data?: { message?: string | string[] } }
+      const msg = data?.data?.message
+      errorMessage.value = Array.isArray(msg)
+        ? msg.join('. ')
+        : (msg ?? 'Something went wrong. Please try again or call us directly.')
       return false
     }
   }

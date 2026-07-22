@@ -24,7 +24,7 @@ const pillars = [
   {
     icon: 'lucide:clock',
     title: 'Open 365 days',
-    text: 'From 5 AM to 10 PM, every single day. Train when life lets you.',
+    text: 'From 5 AM to 10 PM most days (9 PM Sundays). Train when life lets you.',
   },
 ]
 </script>
@@ -63,8 +63,9 @@ const pillars = [
             <Icon name="lucide:user" class="h-7 w-7" />
           </div>
           <div>
-            <h4 class="font-semibold text-white">{{ coach.specialty }}</h4>
-            <p class="text-sm text-zinc-400">{{ coach.bio }}</p>
+            <h4 class="font-semibold text-white">{{ coach.name }}</h4>
+            <p class="text-sm text-accent-300">{{ coach.specialty }}</p>
+            <p class="mt-1 text-sm text-zinc-400">{{ coach.bio }}</p>
             <div class="mt-2 flex flex-wrap gap-1.5">
               <span
                 v-for="cert in coach.certifications"

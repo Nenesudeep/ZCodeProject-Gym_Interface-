@@ -4,27 +4,28 @@ import { useContent } from '~/app/composables/useContent'
 const route = useRoute()
 const { article } = useContent()
 const slug = computed(() => route.params.slug as string)
-const found = computed(() => article(slug.value))
+const post = computed(() => article(slug.value))
 
-if (!found.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Article not found', fatal: true })
-}
-
-const post = found.value!
+watchEffect(() => {
+  if (!post.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Article not found', fatal: true })
+  }
+})
 
 useSeoMeta({
-  title: `${post.title} | Anchor Strength Blog`,
-  description: post.excerpt,
-  ogTitle: post.title,
-  ogDescription: post.excerpt,
+  title: () => (post.value ? post.value.title : 'Article'),
+  description: () => post.value?.excerpt,
+  ogTitle: () => post.value?.title,
+  ogDescription: () => post.value?.excerpt,
   ogType: 'article',
+  ogImage: '/og-default.jpg',
 })
 </script>
 
 <template>
-  <div>
+  <div v-if="post">
     <section class="border-b border-white/5 bg-gradient-to-b from-brand-950 to-ink-950">
-      <AppContainer class="py-14 sm:py-18">
+      <AppContainer class="py-14 sm:py-20">
         <NuxtLink to="/blog" class="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-accent-300">
           <Icon name="lucide:arrow-left" class="h-4 w-4" />
           All articles
@@ -33,7 +34,9 @@ useSeoMeta({
           {{ post.title }}
         </h1>
         <div class="mt-4 flex items-center gap-3 text-sm text-zinc-500">
-          <time>{{ new Date(post.date).toLocaleDateString('en-IN', { dateStyle: 'long' }) }}</time>
+          <time :datetime="post.date">
+            {{ new Date(post.date).toLocaleDateString('en-IN', { dateStyle: 'long' }) }}
+          </time>
           <span>·</span>
           <span>{{ post.author }}</span>
         </div>

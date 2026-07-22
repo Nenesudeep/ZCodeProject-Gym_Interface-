@@ -7,7 +7,7 @@ export const programs: Program[] = [
     slug: 'calisthenics',
     title: 'Calisthenics',
     tagline: 'Master your bodyweight',
-    icon: 'lucide:flexibility',
+    icon: 'lucide:person-standing',
     description:
       "Boduppal's first dedicated calisthenics training — build raw strength, control and skill using just your bodyweight.",
     body: [

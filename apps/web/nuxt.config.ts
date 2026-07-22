@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'en' },
       titleTemplate: '%s · Anchor Strength',
-      title: 'Anchor Strength — Boduppal\'s 1st Calisthenics Gym',
+      title: "Boduppal's 1st Calisthenics Gym",
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -44,6 +44,8 @@ export default defineNuxtConfig({
             'Anchor Strength is Boduppal\'s first calisthenics gym. Calisthenics, MMA, kettlebell group training, yoga, dance, animal flow & more in Hyderabad. Join a team, not just a gym.',
         },
         { name: 'theme-color', content: '#0a0a0b' },
+        { property: 'og:image', content: '/og-default.jpg' },
+        { name: 'twitter:card', content: 'summary_large_image' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

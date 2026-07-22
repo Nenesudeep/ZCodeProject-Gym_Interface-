@@ -39,7 +39,8 @@ const tag = computed(() => {
 
 const isExternal = computed(() => {
   if (!props.href) return false
-  return /^(https?:|tel:|mailto:|wa\.me)/.test(props.href)
+  // http(s) and WhatsApp open in a new tab; tel/mailto stay in the same context.
+  return /^(https?:|wa\.me|https:\/\/wa\.me)/.test(props.href)
 })
 </script>
 

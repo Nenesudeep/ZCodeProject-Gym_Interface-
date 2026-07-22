@@ -34,15 +34,19 @@ const goals = [
 ]
 
 const showSuccess = ref(false)
+const successName = ref('')
 
 async function handleSubmit() {
+  const submittedName = form.name.trim()
   const ok = await submit({ ...form })
   if (ok) {
+    successName.value = submittedName
     showSuccess.value = true
     // Reset fields (keep program).
     form.name = ''
     form.phone = ''
     form.email = ''
+    form.goal = ''
     form.message = ''
   }
 }
@@ -59,10 +63,15 @@ async function handleSubmit() {
       </div>
       <h3 class="mt-4 font-display text-2xl">You're all set!</h3>
       <p class="mt-2 text-zinc-400">
-        Thanks{{ form.name ? `, ${form.name.split(' ')[0]}` : '' }} — our team will reach out
+        Thanks{{ successName ? `, ${successName.split(' ')[0]}` : '' }} — our team will reach out
         within a few hours to confirm your session.
       </p>
-      <AppButton variant="ghost" size="sm" class="mt-6" @click="showSuccess = false">
+      <AppButton
+        variant="ghost"
+        size="sm"
+        class="mt-6"
+        @click="showSuccess = false; successName = ''"
+      >
         Submit another
       </AppButton>
     </div>

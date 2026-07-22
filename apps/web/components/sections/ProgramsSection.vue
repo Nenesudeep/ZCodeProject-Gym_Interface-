@@ -28,12 +28,14 @@ const visible = computed(() =>
           { v: 'flagship', l: 'Flagship' },
         ]"
         :key="opt.v"
+        type="button"
         class="rounded-full px-4 py-2 text-sm font-medium transition-colors"
         :class="
           filter === opt.v
             ? 'bg-accent-400 text-ink-950'
             : 'bg-white/5 text-zinc-300 hover:bg-white/10'
         "
+        :aria-pressed="filter === opt.v"
         @click="filter = opt.v as 'all' | 'flagship'"
       >
         {{ opt.l }}

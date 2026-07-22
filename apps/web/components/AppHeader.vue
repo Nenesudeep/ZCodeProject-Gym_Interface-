@@ -9,7 +9,7 @@ const navLinks = [
   { label: 'Gallery', to: '/#gallery' },
   { label: 'Reviews', to: '/#reviews' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Contact', to: '/#contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const mobileOpen = ref(false)
@@ -28,12 +28,12 @@ const waMessage = `Hi ${brand.name}! I'd like to know more about your membership
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2.5" @click="close">
           <span
-            class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-400 font-display text-xl text-ink-950"
+            class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-500 font-display text-xl text-white"
           >
             ⚓
           </span>
-          <span class="font-display text-xl tracking-wide">
-            {{ brand.shortName }} <span class="text-accent-400">Strength</span>
+          <span class="font-display text-xl tracking-wide text-white">
+            {{ brand.shortName }} Strength
           </span>
         </NuxtLink>
 
@@ -69,6 +69,8 @@ const waMessage = `Hi ${brand.name}! I'd like to know more about your membership
         <button
           class="rounded-lg p-2 text-zinc-300 lg:hidden"
           aria-label="Toggle menu"
+          :aria-expanded="mobileOpen"
+          aria-controls="mobile-nav"
           @click="mobileOpen = !mobileOpen"
         >
           <Icon :name="mobileOpen ? 'lucide:x' : 'lucide:menu'" class="h-6 w-6" />
@@ -85,7 +87,7 @@ const waMessage = `Hi ${brand.name}! I'd like to know more about your membership
       leave-from-class="translate-y-0 opacity-100"
       leave-to-class="-translate-y-2 opacity-0"
     >
-      <div v-if="mobileOpen" class="border-t border-white/5 bg-ink-950 lg:hidden">
+      <div v-if="mobileOpen" id="mobile-nav" class="border-t border-white/5 bg-ink-950 lg:hidden">
         <AppContainer class="py-4">
           <nav class="flex flex-col gap-1">
             <NuxtLink

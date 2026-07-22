@@ -1,6 +1,8 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
+import { Transform } from 'class-transformer'
 import {
   IsEnum,
+  IsEmail,
   IsOptional,
   IsString,
   Length,
@@ -21,6 +23,10 @@ export enum LeadGoal {
   GROUP_TRAINING = 'group-training',
 }
 
+/** Empty strings from HTML forms become undefined so `@IsOptional()` works. */
+const emptyToUndefined = ({ value }: { value: unknown }) =>
+  value === '' || value === null ? undefined : value
+
 export class CreateLeadDto {
   @ApiProperty({ example: 'Sai Kumar', minLength: 2, maxLength: 100 })
   @IsString()
@@ -28,7 +34,9 @@ export class CreateLeadDto {
   name!: string
 
   @ApiPropertyOptional({ example: 'sai@example.com' })
+  @Transform(emptyToUndefined)
   @IsOptional()
+  @IsEmail()
   @IsString()
   @MaxLength(254)
   email?: string
@@ -47,17 +55,20 @@ export class CreateLeadDto {
     enum: LeadGoal,
     default: LeadGoal.GENERAL,
   })
+  @Transform(emptyToUndefined)
   @IsOptional()
   @IsEnum(LeadGoal)
   goal?: LeadGoal
 
   @ApiPropertyOptional({ example: 'calisthenics' })
+  @Transform(emptyToUndefined)
   @IsOptional()
   @IsString()
   @MaxLength(120)
   program?: string
 
   @ApiPropertyOptional({ example: 'I want to start next week.' })
+  @Transform(emptyToUndefined)
   @IsOptional()
   @IsString()
   @MaxLength(2000)
@@ -66,11 +77,13 @@ export class CreateLeadDto {
   @ApiPropertyOptional({
     description: 'Hidden honeypot field. Any value = bot submission.',
   })
+  @Transform(emptyToUndefined)
   @IsOptional()
   @IsString()
   website?: string
 
   @ApiPropertyOptional({ description: 'Referrer / UTM source.' })
+  @Transform(emptyToUndefined)
   @IsOptional()
   @IsString()
   @MaxLength(200)

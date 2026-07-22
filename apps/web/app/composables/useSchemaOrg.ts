@@ -8,16 +8,17 @@ import { brand } from '~/app/theme.config'
  * Usage in any page: `useSchemaOrg()` inside <script setup>.
  */
 export function useSchemaOrg() {
-  const fullAddress = `${brand.address.line1}, ${brand.address.line2}, ${brand.address.city}, ${brand.address.region} ${brand.address.postalCode}`
+  const site = useSiteConfig()
+  const siteUrl = String(site.url || 'https://anchorstrength.fit').replace(/\/$/, '')
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'HealthClub',
-    '@id': `${brand.address.mapQuery}#healthclub`,
+    '@id': `${siteUrl}/#healthclub`,
     name: brand.name,
     description: `${brand.tagline}. Calisthenics, MMA, kettlebell group training, yoga, dance, animal flow, mudgars, steel mace, arm wrestling and more in ${brand.address.city}.`,
-    image: `https://anchorstrength.fit/og-default.jpg`,
-    url: 'https://anchorstrength.fit',
+    image: `${siteUrl}/og-default.jpg`,
+    url: siteUrl,
     telephone: `+${brand.contact.phones[0]?.number}`,
     email: brand.contact.email,
     address: {
@@ -56,16 +57,17 @@ export function useSchemaOrg() {
     },
     sameAs: [
       `https://instagram.com/${brand.contact.instagram}`,
-      brand.contact.facebook
-        ? `https://facebook.com/${brand.contact.facebook}`
-        : '',
+      brand.contact.facebook ? `https://facebook.com/${brand.contact.facebook}` : '',
     ].filter(Boolean),
     makesOffer: [
-      'Calisthenics',
-      'MMA',
-      'Kettlebell Group Training',
-      'Yoga',
-      'Personal Training',
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Calisthenics' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'MMA' } },
+      {
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: 'Kettlebell Group Training' },
+      },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Yoga' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Personal Training' } },
     ],
   }
 

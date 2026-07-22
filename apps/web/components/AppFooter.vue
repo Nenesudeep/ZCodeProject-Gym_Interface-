@@ -13,11 +13,11 @@ const waMessage = `Hi ${brand.name}! I have a question.`
         <div class="lg:col-span-2">
           <div class="flex items-center gap-2.5">
             <span
-              class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-400 font-display text-xl text-ink-950"
+              class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-500 font-display text-xl text-white"
             >
               ⚓
             </span>
-            <span class="font-display text-xl tracking-wide">{{ brand.name }}</span>
+            <span class="font-display text-xl tracking-wide text-white">{{ brand.name }}</span>
           </div>
           <p class="mt-4 max-w-sm text-sm text-zinc-400">
             {{ brand.tagline }}. {{ brand.subTagline }} Calisthenics, MMA, kettlebell group
@@ -46,7 +46,7 @@ const waMessage = `Hi ${brand.name}! I have a question.`
               v-for="phone in brand.contact.phones"
               :key="phone.number"
               :href="telLink(phone.number)"
-              aria-label="Call"
+              :aria-label="`Call ${phone.label}`"
               class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-zinc-300 transition-colors hover:bg-accent-400 hover:text-ink-950"
             >
               <Icon name="lucide:phone" class="h-5 w-5" />
@@ -62,7 +62,7 @@ const waMessage = `Hi ${brand.name}! I have a question.`
             <li><NuxtLink to="/#pricing" class="text-zinc-400 hover:text-accent-300">Pricing</NuxtLink></li>
             <li><NuxtLink to="/#reviews" class="text-zinc-400 hover:text-accent-300">Reviews</NuxtLink></li>
             <li><NuxtLink to="/blog" class="text-zinc-400 hover:text-accent-300">Blog</NuxtLink></li>
-            <li><NuxtLink to="/#contact" class="text-zinc-400 hover:text-accent-300">Contact</NuxtLink></li>
+            <li><NuxtLink to="/contact" class="text-zinc-400 hover:text-accent-300">Contact</NuxtLink></li>
           </ul>
         </div>
 

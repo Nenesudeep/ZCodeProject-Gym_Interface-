@@ -5,13 +5,14 @@ import { useSchemaOrg } from '~/app/composables/useSchemaOrg'
 // This is the SEO landing page; SSR renders it server-side.
 
 useSeoMeta({
-  title: 'Anchor Strength — Boduppal\'s 1st Calisthenics Gym | Hyderabad',
+  title: "Boduppal's 1st Calisthenics Gym | Hyderabad",
   description:
     'Calisthenics, MMA, kettlebell group training, yoga, dance & more in Boduppal, Hyderabad. Join a team, not just a gym. Free trial available. Open 365 days, 5 AM–10 PM.',
-  ogTitle: 'Anchor Strength — Boduppal\'s 1st Calisthenics Gym',
+  ogTitle: "Anchor Strength — Boduppal's 1st Calisthenics Gym",
   ogDescription:
-    'East Hyderabad\'s most complete strength & functional training gym. Calisthenics, MMA, kettlebell, yoga & more. Book a free trial today.',
+    "East Hyderabad's most complete strength & functional training gym. Calisthenics, MMA, kettlebell, yoga & more. Book a free trial today.",
   ogType: 'website',
+  ogImage: '/og-default.jpg',
 })
 
 // Local business structured data for Google rich results.
@@ -20,13 +21,13 @@ useSchemaOrg()
 
 <template>
   <div>
-    <HeroSection />
-    <AboutSection />
-    <ProgramsSection />
-    <PricingSection />
-    <GallerySection />
-    <TestimonialsSection />
-    <FaqSection />
-    <ContactSection />
+    <SectionsHeroSection />
+    <SectionsAboutSection />
+    <SectionsProgramsSection />
+    <SectionsPricingSection />
+    <SectionsGallerySection />
+    <SectionsTestimonialsSection />
+    <SectionsFaqSection />
+    <SectionsContactSection />
   </div>
 </template>

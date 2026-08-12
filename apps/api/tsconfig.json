@@ -12,7 +12,7 @@
     "verbatimModuleSyntax": false,
     "isolatedModules": false,
     "sourceMap": true,
-    "incremental": true,
+    "incremental": false,
     "declaration": false,
     "resolveJsonModule": true,
     "useDefineForClassFields": false

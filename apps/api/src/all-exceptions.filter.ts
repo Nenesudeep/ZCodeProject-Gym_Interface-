@@ -43,8 +43,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
         status = HttpStatus.BAD_REQUEST
         message = 'Database validation error.'
       }
-    } else if (exception instanceof Error) {
-      message = exception.message
     }
 
     if (status >= 500) {

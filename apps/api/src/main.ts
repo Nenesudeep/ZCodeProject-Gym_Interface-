@@ -4,7 +4,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { Logger as PinoLogger } from 'nestjs-pino'
 import helmet from 'helmet'
 import { AppModule } from './app.module'
-import { Config, getConfig } from './config'
+import { getConfig } from './config'
+import { AllExceptionsFilter } from './all-exceptions.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true })
@@ -13,6 +14,9 @@ async function bootstrap() {
   app.useLogger(app.get(PinoLogger))
 
   const config = getConfig()
+
+  // Keep error responses consistent and avoid exposing internal failures.
+  app.useGlobalFilters(new AllExceptionsFilter())
 
   // Security headers. loosen CSP so Swagger UI renders in dev.
   app.use(

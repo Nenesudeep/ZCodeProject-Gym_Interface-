@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
-import { IsEmail, IsOptional, IsString, Length, MaxLength } from 'class-validator'
+import { IsEmail, IsOptional, IsString, Length, Matches, MaxLength } from 'class-validator'
 
 export class CreateContactDto {
   @ApiProperty({ example: 'Priya Sharma' })
@@ -14,6 +14,9 @@ export class CreateContactDto {
   @ApiPropertyOptional({ example: '+91 79894 58980' })
   @IsOptional()
   @IsString()
+  @Matches(/^[+\d][\d\s-]{7,19}$/, {
+    message: 'phone must be a valid phone number',
+  })
   phone?: string
 
   @ApiPropertyOptional({ example: 'Partnership enquiry' })

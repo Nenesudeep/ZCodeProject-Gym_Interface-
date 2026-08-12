@@ -37,17 +37,6 @@ export class LeadsService {
     return lead
   }
 
-  findAll() {
-    return this.prisma.lead.findMany({
-      orderBy: { createdAt: 'desc' },
-      take: 100,
-    })
-  }
-
-  findOne(id: string) {
-    return this.prisma.lead.findUnique({ where: { id } })
-  }
-
   private notifyStaff(
     name: string,
     phone: string,
@@ -68,8 +57,16 @@ export class LeadsService {
       .filter(Boolean)
       .join('\n')
 
-    const html = `<pre style="font:14px/1.5 -apple-system,Segoe UI,sans-serif;white-space:pre-wrap">${text}</pre>`
+    const html = `<pre style="font:14px/1.5 -apple-system,Segoe UI,sans-serif;white-space:pre-wrap">${escapeHtml(text)}</pre>`
 
     return this.notify.sendInternalEmail({ subject, text, html })
   }
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (character) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
+      character
+    ]!,
+  )
 }

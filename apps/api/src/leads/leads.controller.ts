@@ -1,11 +1,11 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common'
+import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { Throttle } from '@nestjs/throttler'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { LeadsService } from './leads.service'
 import { CreateLeadDto } from './dto/create-lead.dto'
 
 @ApiTags('leads')
-@Controller('api/leads')
+@Controller('leads')
 export class LeadsController {
   constructor(private readonly leads: LeadsService) {}
 
@@ -21,17 +21,5 @@ export class LeadsController {
     }
     const lead = await this.leads.create(dto)
     return { ok: true, id: lead.id }
-  }
-
-  @Get()
-  @ApiOperation({ summary: 'List recent leads (admin)' })
-  findAll() {
-    return this.leads.findAll()
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Get a single lead (admin)' })
-  findOne(@Param('id') id: string) {
-    return this.leads.findOne(id)
   }
 }

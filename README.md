@@ -27,7 +27,8 @@ packages/
 
 ## Quick start
 
-Requirements: Node ≥ 20, pnpm (`corepack enable`), Docker.
+Requirements: Node 20.x, pnpm (`corepack enable`), Docker. Strapi currently
+supports Node 20 but not newer major Node versions.
 
 ```bash
 # 1. Install dependencies

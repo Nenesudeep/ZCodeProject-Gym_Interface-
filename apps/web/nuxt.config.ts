@@ -14,6 +14,29 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
   ],
 
+  icon: {
+    serverBundle: {
+      collections: ['lucide'],
+    },
+    clientBundle: {
+      scan: true,
+      icons: [
+        'lucide:person-standing',
+        'lucide:user-round',
+        'lucide:flame',
+        'lucide:swords',
+        'lucide:flower-2',
+        'lucide:music',
+        'lucide:paw-print',
+        'lucide:hammer',
+        'lucide:wrench',
+        'lucide:hand',
+        'lucide:trophy',
+        'lucide:calendar-check',
+      ],
+    },
+  },
+
   // Site URL — used by sitemap + robots + canonical URLs.
   // Override with SITE_URL in production.
   site: {

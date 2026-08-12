@@ -126,7 +126,7 @@ export const programs: Program[] = [
     slug: 'steel-mace',
     title: 'Steel Mace',
     tagline: 'Asymmetric strength',
-    icon: 'lucide:screwdriver',
+    icon: 'lucide:wrench',
     description:
       'Steel mace training for full-body strength, core stability and rotational power.',
     body: [

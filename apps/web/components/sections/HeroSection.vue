@@ -61,23 +61,20 @@ const stats = [
           </dl>
         </div>
 
-        <!-- Visual: placeholder hero card -->
+        <!-- Visual: real training image -->
         <div class="relative animate-fade-in lg:justify-self-end">
           <div
-            class="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-brand-800 via-ink-800 to-accent-900/40 shadow-2xl"
+            class="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-ink-800 shadow-2xl"
           >
-            <!-- Decorative grid + anchor -->
-            <div
-              class="absolute inset-0 opacity-20"
-              style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 32px 32px;"
+            <img
+              src="/images/hero-calisthenics.webp"
+              alt="Athlete training calisthenics on a pull-up rig"
+              class="h-full w-full object-cover"
             />
-            <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-              <span class="text-8xl">⚓</span>
-              <p class="mt-4 font-display text-2xl tracking-wide">YOUR PHOTO HERE</p>
-              <p class="mt-2 text-sm text-zinc-400">
-                Drop in a gym interior or action shot via the CMS to replace this placeholder.
-              </p>
-            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent" />
+            <p class="absolute bottom-5 left-5 right-5 font-display text-2xl tracking-wide text-white">
+              Train with purpose.
+            </p>
           </div>
           <!-- Floating badge -->
           <div

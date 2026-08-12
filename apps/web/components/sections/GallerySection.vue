@@ -8,8 +8,8 @@ const items = gallery()
 <template>
   <SectionShell id="gallery" tone="muted" eyebrow="Inside the box" title="The space & the energy.">
     <template #subtitle>
-      A peek at the floor, the rig and the community. Real photos and reels coming soon — these
-      placeholders show the layout.
+      A peek at the floor, the rig and the community. More training photos and reels are coming
+      soon.
     </template>
 
     <div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
@@ -19,8 +19,15 @@ const items = gallery()
         class="group relative aspect-square overflow-hidden rounded-2xl border border-white/10"
         :class="i === 0 ? 'col-span-2 row-span-2 aspect-auto lg:aspect-auto' : ''"
       >
-        <!-- Gradient placeholder -->
+        <!-- Image with gradient fallback for CMS items that are not uploaded yet. -->
+        <img
+          v-if="item.image"
+          :src="item.image"
+          :alt="`${item.title}: ${item.caption}`"
+          class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
         <div
+          v-else
           class="absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-105"
           :class="item.gradient"
         />

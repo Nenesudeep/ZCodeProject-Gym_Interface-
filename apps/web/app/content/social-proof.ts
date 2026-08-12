@@ -97,18 +97,21 @@ export const galleryItems: GalleryItem[] = [
     title: 'Calisthenics rig',
     caption: 'Pull-up bars, rings and parallel bars — the heart of the floor.',
     gradient: 'from-brand-700 to-ink-900',
+    image: '/images/hero-calisthenics.webp',
   },
   {
     type: 'reel',
     title: 'First muscle-up',
     caption: 'Member hitting their first muscle-up after months of work.',
     gradient: 'from-accent-500 to-brand-800',
+    image: '/images/hero-calisthenics.webp',
   },
   {
     type: 'photo',
     title: 'Kettlebell group',
     caption: '6:30 AM group session. The energy is real.',
     gradient: 'from-ink-700 to-brand-900',
+    image: '/images/gallery-kettlebell.webp',
   },
   {
     type: 'photo',
@@ -127,5 +130,6 @@ export const galleryItems: GalleryItem[] = [
     title: 'Community',
     caption: 'Join a team, not just a gym.',
     gradient: 'from-brand-600 to-accent-600',
+    image: '/images/gallery-community.webp',
   },
 ]

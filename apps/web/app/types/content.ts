@@ -73,6 +73,7 @@ export interface GalleryItem {
   type: 'photo' | 'reel'
   title: string
   caption: string
-  /** Placeholder gradient class until real media is uploaded. */
+  /** Fallback gradient when a CMS image is not available. */
   gradient: string
+  image?: string
 }

@@ -35,4 +35,4 @@ COPY --from=builder /app/apps/api/node_modules ./apps/api/node_modules
 
 EXPOSE 4000
 
-CMD ["node", "apps/api/dist/main.js"]
+CMD ["sh", "-c", "pnpm --filter @anchor/api exec prisma migrate deploy && node apps/api/dist/main.js"]

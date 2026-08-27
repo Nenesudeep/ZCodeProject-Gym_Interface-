@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core'
-import { ValidationPipe, Logger } from '@nestjs/common'
+import { ValidationPipe, Logger, RequestMethod } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { Logger as PinoLogger } from 'nestjs-pino'
 import helmet from 'helmet'
 import { AppModule } from './app.module'
-import { getConfig } from './config'
+import { getConfig, isCorsOriginAllowed } from './config'
 import { AllExceptionsFilter } from './all-exceptions.filter'
 
 async function bootstrap() {
@@ -26,9 +26,11 @@ async function bootstrap() {
     }),
   )
 
-  // CORS — origins come from env as a comma-separated list.
+  // CORS — origins come from env as a comma-separated list (exact or `*` wildcard).
   app.enableCors({
-    origin: config.corsOrigins,
+    origin: (origin, callback) => {
+      callback(null, isCorsOriginAllowed(origin, config.corsOrigins))
+    },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   })
@@ -44,7 +46,13 @@ async function bootstrap() {
   )
 
   // Global API prefix keeps the surface tidy and versionable.
-  app.setGlobalPrefix('api', { exclude: ['health'] })
+  // Health stays at `/health` (and `/health/ready`) so Render can probe it.
+  app.setGlobalPrefix('api', {
+    exclude: [
+      { path: 'health', method: RequestMethod.ALL },
+      { path: 'health/ready', method: RequestMethod.ALL },
+    ],
+  })
 
   // Swagger / OpenAPI docs at /api/docs
   if (config.nodeEnv !== 'production' || config.enableSwaggerInProd) {
@@ -61,10 +69,20 @@ async function bootstrap() {
     SwaggerModule.setup('api/docs', app, document)
   }
 
+  const logger = new Logger('bootstrap')
+  if (
+    config.nodeEnv === 'production' &&
+    config.corsOrigins.every((origin) => /localhost|127\.0\.0\.1/i.test(origin))
+  ) {
+    logger.warn(
+      'CORS_ORIGINS is localhost-only — browser form POSTs from Vercel will be blocked.',
+    )
+  }
+
   await app.listen(config.port, '0.0.0.0')
 
-  const logger = new Logger('bootstrap')
   logger.log(`🚀 API ready on http://localhost:${config.port}`)
+  logger.log(`CORS origins: ${config.corsOrigins.join(', ') || '(none)'}`)
   logger.log(`📘 Swagger at  http://localhost:${config.port}/api/docs`)
 }
 

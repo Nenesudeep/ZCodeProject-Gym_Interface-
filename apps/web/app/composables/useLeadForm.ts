@@ -61,7 +61,8 @@ export function useLeadForm(endpoint: '/api/leads' | '/api/contact' = '/api/lead
     )
 
     try {
-      await $fetch(`${pub.apiBaseUrl}${endpoint}`, {
+      const base = String(pub.apiBaseUrl ?? '').replace(/\/+$/, '')
+      await $fetch(`${base}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body,

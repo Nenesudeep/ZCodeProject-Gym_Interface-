@@ -45,10 +45,19 @@ export default defineNuxtConfig({
   },
 
   // Runtime config: secrets/server-only + public (exposed to client).
+  // Origins only — no trailing slash, no `/api` suffix (Nest already prefixes `/api`).
   runtimeConfig: {
-    apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:4000',
+    apiBaseUrl: (
+      process.env.NUXT_API_BASE_URL ||
+      process.env.API_BASE_URL ||
+      'http://localhost:4000'
+    ).replace(/\/+$/, ''),
     public: {
-      apiBaseUrl: process.env.PUBLIC_API_BASE_URL || 'http://localhost:4000',
+      apiBaseUrl: (
+        process.env.NUXT_PUBLIC_API_BASE_URL ||
+        process.env.PUBLIC_API_BASE_URL ||
+        'http://localhost:4000'
+      ).replace(/\/+$/, ''),
       plausibleDomain: process.env.PLAUSIBLE_DOMAIN || '',
     },
   },
@@ -104,5 +113,10 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
+    // Nitro auto-detects Vercel via `VERCEL=1` (zero-config). Pin `vercel` in
+    // that environment so SSR uses the Build Output API (`.vercel/output`).
+    // Do not hardcode this unconditionally — Docker / local `nuxt build` must
+    // keep emitting `.output` for `node .output/server/index.mjs`.
+    ...(process.env.VERCEL ? { preset: 'vercel' as const } : {}),
   },
 })

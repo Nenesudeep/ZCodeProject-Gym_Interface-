@@ -54,3 +54,4 @@ apps/api/prisma/migrations/dev.db*
 
 # Misc
 .cache/
+.vercel/

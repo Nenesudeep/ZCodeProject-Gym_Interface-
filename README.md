@@ -57,6 +57,12 @@ pnpm dev
 | CMS | http://localhost:1337/admin | Strapi admin |
 | Mail catcher | http://localhost:8025 | Mailpit (dev email) |
 
+## Production deploy
+
+Vercel (Nuxt SSR) + Render (NestJS Docker) + Neon (Postgres). CMS and Redis are not deployed.
+
+See **[DEPLOY.md](./DEPLOY.md)** for host settings and env vars.
+
 ## Scripts
 
 | Command | Description |

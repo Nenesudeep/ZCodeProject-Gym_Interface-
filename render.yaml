@@ -1,0 +1,35 @@
+# Render Blueprint — NestJS API only.
+# Web (Nuxt) is deployed on Vercel. Strapi CMS and Redis are out of scope.
+# https://render.com/docs/blueprint-spec
+#
+# Connect this GitHub repo on Render → New Blueprint Instance, or create a
+# Docker web service manually using the settings below.
+
+services:
+  - type: web
+    name: anchor-strength-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./apps/api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Neon Postgres. Use the **direct** (non-pooler) host and include sslmode=require.
+      # Example: postgresql://USER:PASSWORD@ep-xxx.region.aws.neon.tech/neondb?sslmode=require
+      - key: DATABASE_URL
+        sync: false
+      # Comma-separated browser origins. Must include the Vercel URL (and custom domain).
+      # Example: https://anchorstrength.fit,https://your-app.vercel.app,https://*.vercel.app
+      - key: CORS_ORIGINS
+        sync: false
+      # Optional — forms still persist to Postgres if this is unset.
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_TO
+        sync: false
+      - key: WHATSAPP_PHONE
+        value: '919379066066'

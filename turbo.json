@@ -5,7 +5,17 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".output/**", ".nuxt/**", "dist/**", "build/**"]
+      "outputs": [".output/**", ".nuxt/**", "dist/**", "build/**", ".vercel/**"],
+      "env": [
+        "API_BASE_URL",
+        "PUBLIC_API_BASE_URL",
+        "NUXT_API_BASE_URL",
+        "NUXT_PUBLIC_API_BASE_URL",
+        "SITE_URL",
+        "PLAUSIBLE_DOMAIN",
+        "VERCEL",
+        "NITRO_PRESET"
+      ]
     },
     "dev": {
       "cache": false,

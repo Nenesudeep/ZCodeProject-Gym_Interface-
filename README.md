@@ -4,6 +4,16 @@ Marketing website, NestJS backend, and Strapi CMS for **Anchor Strength** — Bo
 
 Built to out-class the reference site (`starfitnessstudio.in`) with server-side rendering for SEO, an editable headless CMS content layer, and a real lead-capture backend.
 
+## Live / Demo
+
+Hosted on Render free tier. The first load after idle can take ~30 seconds.
+
+- **Marketing site:** https://anchor-strength-web.onrender.com
+- **API:** https://anchor-strength-api.onrender.com
+- **Health:** https://anchor-strength-api.onrender.com/health
+
+The trial form writes to Neon Postgres (`leads` table). The newsletter table is unused because there is no subscribe UI yet.
+
 ## Tech stack
 
 | Layer | Tech |

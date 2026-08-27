@@ -1,5 +1,7 @@
 # Production deploy (Vercel + Render + Neon)
 
+**Live now:** [marketing site](https://anchor-strength-web.onrender.com) and [API](https://anchor-strength-api.onrender.com) ([health](https://anchor-strength-api.onrender.com/health)) on Render free tier — see [README.md](./README.md#live--demo).
+
 Marketing site on **Vercel**, NestJS API on **Render** (Docker), Postgres on **Neon**. No member accounts, no Strapi CMS, no Redis.
 
 Prisma migrations already run in the API Docker `CMD` (`prisma migrate deploy` then the Nest server). Do not add a second migrate step on Render.

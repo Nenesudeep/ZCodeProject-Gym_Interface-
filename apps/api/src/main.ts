@@ -28,7 +28,10 @@ async function bootstrap() {
 
   // CORS — origins come from env as a comma-separated list (exact or `*` wildcard).
   app.enableCors({
-    origin: (origin, callback) => {
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
       callback(null, isCorsOriginAllowed(origin, config.corsOrigins))
     },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

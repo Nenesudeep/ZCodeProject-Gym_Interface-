@@ -62,7 +62,7 @@ Import the same GitHub repo. **Root Directory must be `apps/web`** so Nitro writ
 | --- | --- |
 | Root Directory | `apps/web` |
 | Framework | Nuxt.js (from `apps/web/vercel.json`) |
-| Node.js | **20** |
+| Node.js | **20** (`packageManager` is `pnpm@10.34.5` — pnpm 11 needs Node 22 and would fail here) |
 | Install | `cd ../.. && pnpm install --frozen-lockfile --filter @anchor/web...` |
 | Build | `pnpm build` (`nuxt build`) |
 | Output directory | leave **empty** — do not set `.output` or `dist` (that would drop SSR) |

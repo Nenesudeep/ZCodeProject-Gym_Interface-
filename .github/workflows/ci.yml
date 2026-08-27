@@ -35,7 +35,7 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        # Version comes from package.json#packageManager (pnpm@11.12.0).
+        # Version comes from package.json#packageManager (pnpm@10.34.5, Node 20 compatible).
         # Pinning `version: 11` here conflicts with that field.
 
       - name: Setup Node
